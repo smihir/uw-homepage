@@ -6,6 +6,10 @@ import os
 import cgi
 import sys
 import json
+import getpass
+
+print "Env thinks the user is [%s]" % (os.getlogin());
+print "Effective user is [%s]" % (getpass.getuser());
 
 print "Parsing...",
 payload = json.load(sys.stdin)
