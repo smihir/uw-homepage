@@ -4,14 +4,19 @@ print
 
 import os
 import cgi
+import sys
 import json
 
-form = cgi.FieldStorage()
-json_payload = form.getvalue('payload')
-payload = json.loads(json_payload)
+print "Parsing...",
+payload = json.load(sys.stdin)
+print "OK"
 
-script_dir = os.path.join(os.curdir, 'scripts')
 repo = payload['repository']['name']
 branch = payload['ref'].split('/')[2]
 
-os.system("git pull")
+print "Repo: " + repo
+print "Branch: " + branch
+
+if repo == "uw-homepage" and branch == "master":
+    os.system("git pull")
+    print "OK"
